@@ -38,5 +38,8 @@ export class AppComponent {
     })
   }
 
+  recargar(): void {
+    this.getNombres();
+  }
 
 }
