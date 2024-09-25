@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { Persona } from './model';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,12 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class AppComponent {
+
   title: string = 'prueba1';
   numero_de_repeticiones: number = 0;
   repetir: boolean = false;
   nombre: string = 'rafa';
-  personas:any = [];
+  personas: Persona[] = [];
 
   constructor(private oHttp: HttpClient) {
     this.repetir = true;
@@ -27,12 +29,12 @@ export class AppComponent {
   }
 
   getNombres(): void {
-    this.oHttp.get('http://localhost:8085/persona/genera/10').subscribe({
-      next: (data: any) => {
+    this.oHttp.get<Persona[]>('http://localhost:8085/persona/genera/' + this.numero_de_repeticiones).subscribe({
+      next: (data: Persona[]) => {
         console.log(data);
         this.personas = data;
       },
-      error: (error: any) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
       }
     })

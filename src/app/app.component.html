@@ -1,27 +1,44 @@
-<h1>Bienvenidos a el programa {{title}}</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h1>Bienvenidos a el programa {{title}}</h1>
 
-<h2>A la clase de DAW</h2>
+      <h2>A la clase de DAW</h2>
 
-<input type="text" [(ngModel)]="nombre" placeholder="Escribe tu nombre">
+      <input type="text" [(ngModel)]="nombre" placeholder="Escribe tu nombre">
 
-<h2>El nombre que has escrito es: {{nombre}}</h2>
+      <h2 class="my-5">El nombre que has escrito es: {{nombre}}</h2>
 
-<table>
-  <tr>
-    <th>Nombre</th>
-    <th>Apellido1</th>
-    <th>Apellido2</th>
-    <th>email</th>
-  </tr>
-  <tr *ngFor="let persona of personas">
-    <td>{{persona.nombre}}</td>
-    <td>{{persona.apellido1}}</td>
-    <td>{{persona.apellido2}}</td>
-    <td>{{persona.email}}</td>
-  </tr>
-</table>
-<br>
-<br>
+      <div class="my-5">
+        <label for="nombre">Número de repeticiones:</label>
+        <input type="text" [(ngModel)]="numero_de_repeticiones" placeholder="10">
+        <button class="btn btn-primary" (click)="recargar()">Recarga</button>
+      </div>
 
-
-<button (click)="recargar()">Recarga</button>
+      <table class="table table-striped m-5">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido1</th>
+          <th>Apellido2</th>
+          <th>email</th>
+        </tr>
+        <tr *ngFor="let persona of personas">
+          <td>{{persona.nombre}}</td>
+          <td>{{persona.apellido1}}</td>
+          <td>{{persona.apellido2}}</td>
+          <td>{{persona.email}}</td>
+        </tr>
+      </table>
+      <br>
+      <h1>Para añadir boostrap:</h1>
+      <p>npm install bootstrap&#64;5.3.3</p>
+      <p>En angular.json añadir:</p>
+      <p>en "styles": [</p>
+      <p>"node_modules/bootstrap/dist/css/bootstrap.min.css",</p>
+      <p>en "scripts": [</p>
+      <p>"node_modules/bootstrap/dist/js/bootstrap.min.js"</p>
+      <p>en build y en test</p>
+      <br>
+    </div>
+  </div>
+</div>
