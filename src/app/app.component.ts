@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
 import { Persona } from './model';
+import { GeneraPersonasService } from './generaPersonas.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -21,10 +21,15 @@ export class AppComponent {
   nombre: string = 'rafa';
   personas: Persona[] = [];
 
-  constructor(private oHttp: HttpClient) {
+  constructor(private oHttp: HttpClient, private oGeneraPersonasService: GeneraPersonasService) {
     this.repetir = true;
     this.numero_de_repeticiones = 10;
     this.title = 'prueba de DAW';
+    console.log('constructor');
+  }
+
+  ngOnInit(): void {
+    console.log('onInit');
     this.getNombres();
   }
 
@@ -33,6 +38,7 @@ export class AppComponent {
       next: (data: Persona[]) => {
         console.log(data);
         this.personas = data;
+        this.personas.push(this.oGeneraPersonasService.generate());
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
